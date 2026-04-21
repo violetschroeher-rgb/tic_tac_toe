@@ -17,25 +17,27 @@ o is_draw(board)
 class Player:
     def __init__(self, symbol):
         self.symbol = symbol
-        isTurn =False
-    def take_turn():
+        self.isTurn =False
+    def take_turn(self):
         pass
-
 
 class Board:
     def __init__(self):
         self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
-    def start_game():
-        pass
-    def print_board(board):
+    
+    def print_board(self, board):
         pass
 class Game:
     def __init__(self):
+        self.board = Board()
+        self.players = [Player('X'), Player('O')]
+        self.current_player_index = 0
         self.gameEnd = False
-    def check_winner(board, player):
+    def check_winner(self, player):
         pass
-   
-    def is_draw(board):
+    def start_game(self):
+        pass
+    def is_draw(self,):
         pass
 
 
