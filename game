@@ -1,0 +1,42 @@
+"""Requirements
+• Display a 3×3 board
+• Players take turns (X and O)
+• Accept user input for row and column (0–2 or 0–2)
+• Prevent invalid moves (e.g., selecting an already occupied cell) or co-ordinates
+outside the board
+• Detect:
+o Winning conditions (rows, columns, diagonals)
+o Draw condition (board full, no winner)
+Implementation Details
+• Use a list of lists to represent the board
+• Some of the functions:
+o print_board(board)
+o check_winner(board, player)
+o is_draw(board)
+• Alternate turns until game ends"""
+class Player:
+    def __init__(self, symbol):
+        self.symbol = symbol
+        isTurn =False
+    def take_turn():
+        pass
+
+
+class Board:
+    def __init__(self):
+        self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
+    def start_game():
+        pass
+    def print_board(board):
+        pass
+class Game:
+    def __init__(self):
+        self.gameEnd = False
+    def check_winner(board, player):
+        pass
+   
+    def is_draw(board):
+        pass
+
+
+
