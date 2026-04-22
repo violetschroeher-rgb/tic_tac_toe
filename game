@@ -31,6 +31,7 @@ class Player:
                     print("Choose another spot")
                 else:
                     Board.board[row][col] = self.symbol
+                    Board.print_board()
                     isTurn = False
 
             except ValueError:
@@ -41,7 +42,16 @@ class Board:
     def __init__(self):
         self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
     
-    def print_board(self, board):
+    def print_board(self):
+        for i in range(len(self.board)):
+            
+            for j in self.board[i]:
+                if j == 1 or j ==2:
+                    print("|")
+                print(f" {j} ")
+            if i == 1 or i == 0:
+                print("\n_  _  _\n")
+
         pass
 class Game:
     def __init__(self):
