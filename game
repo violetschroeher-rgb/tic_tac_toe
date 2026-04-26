@@ -18,20 +18,21 @@ class Player:
     def __init__(self, symbol):
         self.symbol = symbol
         self.isTurn =False
-    def take_turn(self):
+
+
+    def take_turn(self, board):
         isTurn = True
         while isTurn:
-            
             row = int(input(f"Player {self.symbol} - enter row (0-2): "))
             col = int(input(f"Player {self.symbol} - enter col (0-2): "))
             if type(row)==int and type(col)==int:
                 if not (0 <= row <= 2 and 0 <= col <= 2):
                     print("Out of range, use 0, 1, or 2.")
-                elif Board.board[row][col] != '-':
+                elif board[row][col] != '-':
                     print("Choose another spot")
                 else:
-                    Board.board[row][col] = self.symbol
-                    Board.print_board()
+                    board[row][col] = self.symbol
+                    board.print_board()
                     isTurn = False
 
             else:
@@ -39,32 +40,65 @@ class Player:
         pass
 
 class Board:
+   
     def __init__(self):
         self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
     
     def print_board(self):
-        for i in range(len(self.board)):
-            
-            for j in self.board[i]:
-                if j == 1 or j ==2:
-                    print("|")
-                print(f" {j} ")
-            if i == 1 or i == 0:
-                print("\n_  _  _\n")
+        for row in range(len(self.board)):
+            print(" " + " | ".join(self.board[row]))
+            if row == 1 or row == 0:
+                print(" --+---+--")
 
         pass
 class Game:
     def __init__(self):
-        self.board = Board()
+        self.game = Board()
         self.players = [Player('X'), Player('O')]
         self.current_player_index = 0
         self.gameEnd = False
+
+    @property
+    def current_player(self):
+        return self.players[self.current_player_index]
+    
     def check_winner(self, player):
+        board = self.game.board
+        sym = self.current_player.symbol
+        for row in board:
+            if row == f" {sym} | {sym} | {sym}":
+                return True
         pass
+
     def start_game(self):
-        pass
-    def is_draw(self,):
+        print("Welcome to Tic-Tac-Toe!")
+        self.game.print_board()
+        while not self.gameEnd:
+            player = self.current_player
+            player.take_turn(self.game.board)
+            self.game.print_board()
+
+            if self.check_winner(player):
+                print(f"Player {player.symbol} wins!")
+                self.game_end = True
+
+            elif self.is_draw():
+                print("It's a draw!")
+                self.game_end = True
+            
+            else:
+                self.current_player_index = 1 - self.current_player_index
+
         pass
 
+    def is_draw(self):
+        if '-' not in self.game.board:
+            return True
+        return False
+    
+        pass
 
+if __name__ == "__main__":
+    game = Game()
+    game.start_game()
 
