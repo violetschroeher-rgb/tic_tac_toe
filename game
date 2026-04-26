@@ -21,10 +21,10 @@ class Player:
     def take_turn(self):
         isTurn = True
         while isTurn:
-            try:
-                row = int(input(f"Player {self.symbol} - enter row (0-2): "))
-                col = int(input(f"Player {self.symbol} - enter col (0-2): "))
-
+            
+            row = int(input(f"Player {self.symbol} - enter row (0-2): "))
+            col = int(input(f"Player {self.symbol} - enter col (0-2): "))
+            if type(row)==int and type(col)==int:
                 if not (0 <= row <= 2 and 0 <= col <= 2):
                     print("Out of range, use 0, 1, or 2.")
                 elif Board.board[row][col] != '-':
@@ -34,7 +34,7 @@ class Player:
                     Board.print_board()
                     isTurn = False
 
-            except ValueError:
+            else:
                 print("Enter an integer")
         pass
 
