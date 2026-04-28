@@ -72,10 +72,10 @@ class Game:
 
             if self.check_winner():
                 print(f"Player {player.symbol} wins!")
-                self.game_end = True
+                self.gameEnd = True
             elif self.is_draw():
                 print("It's a draw!")
-                self.game_end = True
+                self.gameEnd = True
             else:
                 self.current_player_index = 1 - self.current_player_index
         print("Game over!")
@@ -84,9 +84,20 @@ class Game:
     def check_winner(self):
         board = self.game.board
         sym = self.current_player.symbol
-        for row in board:
-            if row == f" {sym} | {sym} | {sym}":
+        for i in range(0,3):
+            col = []
+            diag1 = []
+            diag1 += board[i][i]
+            diag2 =[]
+            diag2+=board[i][2-i]
+            win = [sym, sym, sym]
+            for row in board:
+                if row == win:
+                    return True
+                col += row[i]
+            if col == win or diag1 ==win or diag2==win:
                 return True
+            print(win)
         return False
         
     def is_draw(self):
