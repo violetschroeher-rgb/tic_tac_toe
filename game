@@ -15,11 +15,15 @@ o check_winner(board, player)
 o is_draw(board)
 • Alternate turns until game ends"""
 class Player:
+    # Define a player with a symbol attribute and whether it is their turn
+    # symbols get automatically assigned from game class
     def __init__(self, symbol):
         self.symbol = symbol
         self.isTurn =False
 
-
+    # while it is the current players turn, allow them to enter the row and column that they want
+    # check that the input is an int and within the bounds
+    # finally change the symbol on the board itself if conditions are passed
     def take_turn(self, board):
         isTurn = True
         while isTurn:
@@ -39,32 +43,39 @@ class Player:
         pass
 
 class Board:
-   
+    # initialize the board with an 'empty' list of lists
     def __init__(self):
         self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
-    
+    # iterate through the nested list and print each symbol
     def print_board(self):
         for row in range(len(self.board)):
             print(" " + " | ".join(self.board[row]))
             if row == 1 or row == 0:
                 print(" --+---+--")
 
-        pass
+        
 class Game:
+    # initialize the game by setting up a board and two players - symbols x and o
+    # set the current player to X
+    # set the gameEnd to false so we know it is an active gameboard
+
     def __init__(self):
         self.game = Board()
         self.players = [Player('X'), Player('O')]
         self.current_player_index = 0
         self.gameEnd = False
-
+    # property method that returns the current player symbol
     @property
     def current_player(self):
         return self.players[self.current_player_index]
     
-
+    # automatically runs when this program is run
+    # prints the board and welcome message
     def start_game(self):
         print("Welcome to Tic-Tac-Toe!")
         self.game.print_board()
+        # this loop runs through players, alternating turns, and prints the updated board each time
+        # also checks whether the win or draw conditions are fulfilled and ends the game if so
         while not self.gameEnd:
             player = self.current_player
             player.take_turn(self.game.board)
@@ -80,7 +91,8 @@ class Game:
                 self.current_player_index = 1 - self.current_player_index
         print("Game over!")
 
-        
+    # checks horizontally, vertically, and diagonally through the game board for a win condition
+    # # returns true if found, false if not    
     def check_winner(self):
         board = self.game.board
         sym = self.current_player.symbol
@@ -97,9 +109,9 @@ class Game:
                 col += row[i]
             if col == win or diag1 ==win or diag2==win:
                 return True
-            print(win)
         return False
-        
+    # checks to see if the board is full by checking for the - 
+    # returns true if there is a draw false if not    
     def is_draw(self):
         if '-' not in self.game.board[0] and '-' not in self.game.board[1] and '-' not in self.game.board[2]:
             return True
@@ -107,7 +119,7 @@ class Game:
             return False
     
         
-
+# starts the game when the file is run
 if __name__ == "__main__":
     game = Game()
     game.start_game()
